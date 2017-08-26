@@ -14,6 +14,23 @@ public class CardService {
 		this.dao = dao;
 	}
 	
+	public void updateCards(Card card, boolean isCorrect) {
+		List<Card> cards = dao.getCards();
+		cards.remove(card);
+		card.setCycleCounter(0);
+		if (isCorrect == false) {
+			card.setPriority(1);
+			card.setCycleThreshold(10);
+		} else {
+			int currentPriority = card.getPriority();
+			if (currentPriority != 5) {
+				card.setPriority(currentPriority + 1);
+			}
+			card.setCycleThreshold(15);
+		}
+		cards.add(card);
+	}
+	
 	public Card getNextCard() {
 		List<Card> cards = dao.getCards();
 		if (cards == null || cards.size() == 0) {
