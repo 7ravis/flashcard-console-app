@@ -6,9 +6,9 @@ import com.twrog.dto.Card;
 
 public interface CardDao {
 
-	void open();
+	void open(String cardDeck);
 
-	void close();
+	void close(String cardDeck);
 
 	List<Card> getCards();
 

@@ -5,20 +5,20 @@ import java.util.List;
 
 import com.twrog.dto.Card;
 
-public class CardDaoInMem implements CardDao {
+public class CardDao_InMem implements CardDao {
 	private List<Card> cards;
 	
-	public CardDaoInMem(List<Card> cards) {
+	public CardDao_InMem(List<Card> cards) {
 		this.cards = cards;
 	}
 	
 	@Override
-	public void open() {
+	public void open(String cardDeck) {
 		
 	}
 
 	@Override
-	public void close() {
+	public void close(String cardDeck) {
 		
 	}
 

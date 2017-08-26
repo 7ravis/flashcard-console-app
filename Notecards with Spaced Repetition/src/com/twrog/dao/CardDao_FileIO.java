@@ -5,22 +5,22 @@ import java.util.List;
 
 import com.twrog.dto.Card;
 
-public class CardDaoFileImpl implements CardDao {
+public class CardDao_FileIO implements CardDao {
 	private String dataSource;
 	private List<Card> cards;
 	
-	public CardDaoFileImpl(String dataSource) {
+	public CardDao_FileIO(String dataSource) {
 		this.dataSource = dataSource;
 		cards = new ArrayList<>();
 	}
 	
 	@Override
-	public void open() {
+	public void open(String cardDeck) {
 		
 	}
 
 	@Override
-	public void close() {
+	public void close(String cardDeck) {
 		
 	}
 

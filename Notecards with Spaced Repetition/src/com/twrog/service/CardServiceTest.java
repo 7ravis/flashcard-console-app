@@ -9,11 +9,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.twrog.dao.CardDaoInMem;
+import com.twrog.dao.CardDao_InMem;
 import com.twrog.dto.Card;
 
 public class CardServiceTest {
-	CardDaoInMem dao;
+	CardDao_InMem dao;
 	CardService service;
 	private List<Card> cards;
 
@@ -50,7 +50,7 @@ public class CardServiceTest {
 		c6.setCycleThreshold(2);
 		c6.setPriority(3);
 		cards.add(c6);
-		dao = new CardDaoInMem(cards);
+		dao = new CardDao_InMem(cards);
 		service = new CardService(dao);
 	}
 
