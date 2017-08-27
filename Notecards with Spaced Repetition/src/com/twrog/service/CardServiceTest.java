@@ -81,7 +81,8 @@ public class CardServiceTest {
 		assertEquals(1, card.getPriority());
 		card = service.getNextCard();
 		assertEquals("6Front", card.getFront());
-		service.updateCards(card, true);
+		service.updateCards(card, false);
+		assertEquals(1, card.getPriority());
 		card = service.getNextCard();
 		assertEquals("5Front", card.getFront());
 		service.updateCards(card, false);
