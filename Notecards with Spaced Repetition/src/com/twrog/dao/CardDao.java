@@ -6,9 +6,9 @@ import com.twrog.dto.Card;
 
 public interface CardDao {
 
-	void open(String cardDeck);
+	void open(String cardDeck) throws DataPersistenceException;
 
-	void close(String cardDeck);
+	void close(String cardDeck) throws DataPersistenceException;
 
 	List<Card> getCards();
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.twrog.dao.CardDao;
+import com.twrog.dao.DataPersistenceException;
 import com.twrog.dto.Card;
 
 public class CardService {
@@ -12,6 +13,14 @@ public class CardService {
 	
 	public CardService(CardDao dao) {
 		this.dao = dao;
+	}
+	
+	public void open(String cardDeck) throws DataPersistenceException {
+		dao.open(cardDeck);
+	}
+	
+	public void close(String cardDeck) throws DataPersistenceException {
+		dao.close(cardDeck);
 	}
 	
 	public void updateCards(Card card, boolean isCorrect) {

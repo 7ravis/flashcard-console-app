@@ -13,12 +13,12 @@ public class CardDao_InMem implements CardDao {
 	}
 	
 	@Override
-	public void open(String cardDeck) {
+	public void open(String cardDeck) throws DataPersistenceException {
 		
 	}
 
 	@Override
-	public void close(String cardDeck) {
+	public void close(String cardDeck) throws DataPersistenceException {
 		
 	}
 

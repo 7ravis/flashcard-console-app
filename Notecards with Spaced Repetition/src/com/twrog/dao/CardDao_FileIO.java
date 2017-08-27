@@ -14,29 +14,29 @@ public class CardDao_FileIO implements CardDao {
 	private final String DELIM = "::";
 	
 	@Override
-	public void open(String cardDeck) {
+	public void open(String cardDeck) throws DataPersistenceException {
 		Scanner sc = null;
 		try {
 			sc = new Scanner(new FileReader(cardDeck + ".txt"));
-		} catch (FileNotFoundException e) {
-			System.out.println("Error: " + cardDeck + ".txt not found.");
-			e.printStackTrace();
-		}
-		cards = new ArrayList<>();
-		while (sc.hasNextLine()) {
-			String[] input = sc.nextLine().split(DELIM);
-			Card card = new Card(input[0], input[1]);
-			if (input.length == 5) {
-				card.setCycleCounter(Integer.parseInt(input[2]));
-				card.setCycleThreshold(Integer.parseInt(input[3]));
-				card.setPriority(Integer.parseInt(input[4]));
+			cards = new ArrayList<>();
+			while (sc.hasNextLine()) {
+				String[] input = sc.nextLine().split(DELIM);
+				Card card = new Card(input[0], input[1]);
+				if (input.length == 5) {
+					card.setCycleCounter(Integer.parseInt(input[2]));
+					card.setCycleThreshold(Integer.parseInt(input[3]));
+					card.setPriority(Integer.parseInt(input[4]));
+				}
+				cards.add(card);
 			}
-			cards.add(card);
+		} catch (FileNotFoundException e) {
+			throw new DataPersistenceException("Error: " + cardDeck + ".txt not found.");
 		}
+		
 	}
 
 	@Override
-	public void close(String cardDeck) {
+	public void close(String cardDeck) throws DataPersistenceException {
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(cardDeck + ".txt");
@@ -47,8 +47,7 @@ public class CardDao_FileIO implements CardDao {
 			pw.close();
 			cards = null;
 		} catch (FileNotFoundException e) {
-			System.out.println("Error: " + cardDeck + ".txt not found.");
-			e.printStackTrace();
+			throw new DataPersistenceException("Error: session data for " + cardDeck + " could not be persisted");
 		}
 	}
 
