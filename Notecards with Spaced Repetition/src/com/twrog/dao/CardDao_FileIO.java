@@ -2,6 +2,7 @@ package com.twrog.dao;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,7 +37,19 @@ public class CardDao_FileIO implements CardDao {
 
 	@Override
 	public void close(String cardDeck) {
-		
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(cardDeck + ".txt");
+			for (Card card : cards) {
+				pw.println(String.join(DELIM, card.getFront(), card.getBack(), String.valueOf(card.getCycleCounter()), String.valueOf(card.getCycleThreshold()), String.valueOf(card.getPriority())));
+			}
+			pw.flush();
+			pw.close();
+			cards = null;
+		} catch (FileNotFoundException e) {
+			System.out.println("Error: " + cardDeck + ".txt not found.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
