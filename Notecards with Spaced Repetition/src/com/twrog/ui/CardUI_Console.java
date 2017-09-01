@@ -14,7 +14,7 @@ public class CardUI_Console implements CardUI {
 	@Override
 	public int mainMenu() {
 		System.out.println("\n===MAIN MENU===");
-		return readInt("1. Open new deck \n2. Return to current deck \n3. Reverse card sides \n4. Exit program", 1, 4);
+		return readInt("1. Open new deck \n2. Reverse card sides \n3. Exit program", 1, 3);
 	}
 	@Override
 	public String getCardDeckName() {
