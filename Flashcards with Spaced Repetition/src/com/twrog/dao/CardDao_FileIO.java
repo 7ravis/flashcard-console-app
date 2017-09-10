@@ -12,7 +12,7 @@ import com.twrog.dto.Card;
 public class CardDao_FileIO implements CardDao {
 	private List<Card> cards;
 	private final String DELIM = "::";
-	
+
 	@Override
 	public void open(String cardDeck) throws DataPersistenceException {
 		Scanner sc = null;
@@ -21,18 +21,30 @@ public class CardDao_FileIO implements CardDao {
 			cards = new ArrayList<>();
 			while (sc.hasNextLine()) {
 				String[] input = sc.nextLine().split(DELIM);
-				Card card = new Card(input[0], input[1]);
-				if (input.length == 5) {
-					card.setCycleCounter(Integer.parseInt(input[2]));
-					card.setCycleThreshold(Integer.parseInt(input[3]));
-					card.setPriority(Integer.parseInt(input[4]));
+				if (input.length == 2 || input.length == 5) {
+					boolean addCard = true;
+					Card card = new Card(input[0], input[1]);
+					if (input.length == 5) {
+						try {
+							card.setCycleCounter(Integer.parseInt(input[2]));
+							card.setCycleThreshold(Integer.parseInt(input[3]));
+							card.setPriority(Integer.parseInt(input[4]));
+						} catch (NumberFormatException e) {
+							System.out.println("A flashcard was discarded because an integer card property could not be parsed.");
+							addCard = false;
+						}
+					}
+					if (addCard) {
+						cards.add(card);
+					}
+				} else {
+					System.out.println("A flashcard was discarded because it did not contain the correct number of fields.");
 				}
-				cards.add(card);
 			}
 		} catch (FileNotFoundException e) {
 			throw new DataPersistenceException("Error: " + cardDeck + ".txt not found.");
 		}
-		
+
 	}
 
 	@Override
@@ -55,5 +67,5 @@ public class CardDao_FileIO implements CardDao {
 	public List<Card> getCards() {
 		return cards;
 	}
-	
+
 }
